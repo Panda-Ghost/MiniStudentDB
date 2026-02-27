@@ -4,7 +4,7 @@
 #include "database.h"
 using namespace std;
 
-void showMenu() {
+void showMenu() { // 显示菜单
   cout << "===== Student DB =====" << endl;
   cout << "1. Add student" << endl;
   cout << "2. Delete student" << endl;
@@ -13,7 +13,7 @@ void showMenu() {
   cout << "0. Exit" << endl;
 }
 
-void addStudent( Database& db ) {
+void addStudent( Database& db ) { // 添加学生信息
   string name;
   int age;
   double score;
@@ -29,7 +29,7 @@ void addStudent( Database& db ) {
               + st.ins_str() + ";" );
 }
 
-void delStudent( Database& db ) {
+void delStudent( Database& db ) { // 删除学生信息
   int id;
   cout << "Please enter the ID of the student to be deleted: ";
   cin >> id;
@@ -37,7 +37,7 @@ void delStudent( Database& db ) {
               + ";" );
 }
 
-void updStudent( Database& db ) {
+void updStudent( Database& db ) { // 修改学生信息
   int id;
   cout << "Please enter the ID of the student to be updated: ";
   cin >> id;
@@ -56,7 +56,7 @@ void updStudent( Database& db ) {
               + to_string( id ) + ";" );
 }
 
-void listStudents( Database& db ) {
+void listStudents( Database& db ) { // 列出学生信息
   db.execute( "select * from student;" );
 }
 
