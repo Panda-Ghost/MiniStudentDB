@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cassert>
+#include "student.h"
+#include "database.h"
 using namespace std;
 
 void showMenu() {
@@ -11,24 +13,55 @@ void showMenu() {
   cout << "0. Exit" << endl;
 }
 
-void addStudent() {
-  cout << "Add student" << endl;
+void addStudent( Database& db ) {
+  string name;
+  int age;
+  double score;
+  cout << "Please enter the student's information:" << endl;
+  cout << "Name: ";
+  cin >> name;
+  cout << "Age: ";
+  cin >> age;
+  cout << "Score: ";
+  cin >> score;
+  Student st( name, age, score );
+  db.execute( "insert into student (name,age,score) values "
+              + st.ins_str() + ";" );
 }
 
-void delStudent() {
-  cout << "Delete student" << endl;
+void delStudent( Database& db ) {
+  int id;
+  cout << "Please enter the ID of the student to be deleted: ";
+  cin >> id;
+  db.execute( "delete from student where id = " + to_string( id )
+              + ";" );
 }
 
-void updStudent() {
-  cout << "Update student" << endl;
-
+void updStudent( Database& db ) {
+  int id;
+  cout << "Please enter the ID of the student to be updated: ";
+  cin >> id;
+  string name;
+  int age;
+  double score;
+  cout << "Please enter the new information of the student: " << endl;
+  cout << "Name: ";
+  cin >> name;
+  cout << "Age: ";
+  cin >> age;
+  cout << "Score: ";
+  cin >> score;
+  Student st( name, age, score );
+  db.execute( "update student set " + st.upd_str() + " where id = "
+              + to_string( id ) + ";" );
 }
 
-void listStudents() {
-  cout << "List students" << endl;
+void listStudents( Database& db ) {
+  db.execute( "select * from student;" );
 }
 
 int main() {
+  Database db( "./data/student.db" );
   while ( true ) {
     showMenu();
     cout << "Please enter the operation number: ";
@@ -43,16 +76,16 @@ int main() {
     }
     switch ( num ) {
     case 1:
-      addStudent();
+      addStudent( db );
       break;
     case 2:
-      delStudent();
+      delStudent( db );
       break;
     case 3:
-      updStudent();
+      updStudent( db );
       break;
     case 4:
-      listStudents();
+      listStudents( db );
       break;
     case 0:
       return 0;
