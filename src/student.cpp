@@ -8,12 +8,12 @@ Student::Student( std::string n, int a, double s )
 
 std::string Student::ins_str() {
   std::stringstream ss;
-  ss << "(" << name << "," << age << "," << score << ")";
+  ss << "(\'" << name << "\'," << age << "," << score << ")";
   return ss.str();
 }
 
 std::string Student::upd_str() {
   std::stringstream ss;
-  ss << "name=" << name << ", age=" << age << ", score=" << score;
+  ss << "name=\'" << name << "\', age=" << age << ", score=" << score;
   return ss.str();
 }
