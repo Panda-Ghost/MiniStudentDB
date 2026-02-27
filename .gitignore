@@ -1,0 +1,9 @@
+# executable
+studentdb
+
+# object files
+*.o
+
+# database file
+data/student.db
+
